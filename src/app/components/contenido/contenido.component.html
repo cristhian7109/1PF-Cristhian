@@ -1,0 +1,28 @@
+<div class="content-cards">
+    <div class="fecha">
+        <p>Fecha: {{todayDate|date:'dd/MM/YYYY'}}</p>
+    </div>
+    <div class="movie-card" *ngFor="let student of students">
+        <div class="movie-card-item-content">
+            <div class="movie-info">
+                <div class="image-loader">
+                    <img
+                        role="presentation"
+                        alt="user"
+                        src={{student.img}}
+                    />
+                </div>
+            </div>
+            <div class="movies-description">
+                <div class="movies-description-title">
+                    {{student.nombre}} {{student.apellido}}
+                </div>
+                <div class="movies-description-extra">
+                    edad: {{student.edad}}
+                    <br>
+                    promedio: {{student.promedio}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

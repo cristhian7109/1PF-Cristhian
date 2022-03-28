@@ -1,0 +1,81 @@
+.toolbar{
+    position:relative;
+    height: calc(100vh - 102px);
+    width: 220px;
+    background:#1a1a1a;
+    box-shadow: 10px 0 0 #a17915;
+    border-left: 10px solid #1a1a1a;
+    overflow-x:hidden;
+}
+.toolbar ul{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    padding-left:5px;
+    padding-top:40px;
+}
+.toolbar ul li{
+    position:relative;
+    list-style:none;
+    width:100%;
+    border-radius: 20px 0 0 20px;
+    
+}
+.toolbar ul li.active{
+    background:#a17915;
+}
+/* .toolbar ul li:hover{
+    background:#a17915;
+} */
+.toolbar ul li.active a::before{
+    content:'';
+    position: absolute;
+    top:-30px;
+    right:0;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    box-shadow: 15px 15px 0px #a17915;
+}
+.toolbar ul li.active a::after{
+    content:'';
+    position: absolute;
+    bottom:-30px;
+    right:0;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    box-shadow: 15px -15px 0px #a17915;
+}  
+.toolbar ul li a{   
+    position:relative;
+    display:flex;
+    text-decoration:none;
+    width:100%;
+    color:#fff;
+}
+.toolbar ul li a .icon{
+    position:relative;
+    display:block;
+    min-width:60px;
+    height:60px;
+    line-height:60px;
+    text-align:center;
+}
+.toolbar ul li a .icon div{
+    position:relative;
+    font-size:1.5em;
+    z-index:1;
+}        
+.toolbar ul li a .title{
+    position:relative;
+    display:block;
+    padding-left:10px;
+    height:60px;
+    line-height:60px;
+    font-size: 18px;
+    white-space: nowrap;
+    font-family: monospace;
+    font-weight: bold;
+}
