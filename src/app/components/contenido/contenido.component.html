@@ -20,7 +20,7 @@
                 <div class="movies-description-extra">
                     edad: {{student.edad}}
                     <br>
-                    promedio: {{student.promedio}}
+                    promedio: <span [ngClass]="student.promedio < 14 ? 'desaprobado': 'aprobado'">{{student.promedio}}</span>
                 </div>
             </div>
         </div>

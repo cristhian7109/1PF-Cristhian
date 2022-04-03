@@ -61,3 +61,11 @@
     font-size: 14px;
     font-family: sans-serif;
 }
+.desaprobado{
+    color: red;
+    font-weight: bold;
+}
+.aprobado{
+    color: green;
+    font-weight: bold;
+}
