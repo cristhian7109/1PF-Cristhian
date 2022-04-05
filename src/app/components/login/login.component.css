@@ -1,0 +1,106 @@
+
+.closed{
+    opacity: 0;
+    display: none;
+}
+.buttonLogin{
+    height: 40px;
+    width: 120px;
+    color: #fff;
+    border: solid 1px rgb(88, 88, 88);
+    background: #1a1a1a;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+}
+.open{
+    opacity: 1;
+    background: rgba(0,0,0,0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    size: 100%;
+    text-align: center;
+    transition: opacity 0.3s ease;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+}
+.modalBox{
+    /* background: white; */
+    size: 300px;
+    margin: 0 auto;
+    position: relative;
+    top: calc( 50% - 150px);
+    transform: translateY(-50%);
+}
+.containerlogin{
+    margin: 10vh auto;
+    width: 500px;
+    background-color: #fff;
+    text-align: center;
+    padding: 32px;
+    border-radius: 16px;
+}
+.containerlogin h3{
+    margin: 8px
+}
+.containerlogin form{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    place-content: start;
+    justify-content: center;
+}
+.containerlogin form .incorrecto{
+    color: red;
+}
+.containerlogin form img{
+    margin-left: 8px;
+    cursor: pointer;
+    width: 25px;
+}
+.containerlogin form div{
+    width: 100%;
+    margin-bottom: 16px;
+}
+.containerlogin form label,input{
+    font-size: 18px;
+    margin-right: 16px;
+}
+.containerlogin form button{
+    font-size: 18px;
+    border-radius: 0.5vw;
+    height: 40px;
+    width: 120px;
+    color: #fff;
+    border: #a17915;
+    background: #a17915;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+}
+.containerlogin form .cancelar{
+    border: #a11515;
+    background: #a11515;
+    margin-right: 32px;
+}
+.containerlogin form .disable{
+    border: grey;
+    background: grey;
+    pointer-events: none;
+}
+.containerlogin form .cancelar:hover{
+    border: #7e0f0f;
+    background: #7e0f0f;
+}
+.containerlogin form button:hover{
+    background-color: #806112;
+    cursor: pointer;
+}
+.containerlogin form p{
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 16px;
+}

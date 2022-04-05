@@ -1,4 +1,15 @@
 <div class="navbar">
-    <img src="https://i.pinimg.com/originals/b1/01/76/b10176c5d94d990405d52ac2bfadfa82.png"  width="100" alt="">
-    ESCUELA DE ARTES ESCENICAS
+    <img class="logo" src="https://i.pinimg.com/originals/b1/01/76/b10176c5d94d990405d52ac2bfadfa82.png"  width="100" alt="">
+    CINE EL CHINI
+    <div class="user" >
+        <div *ngIf=" !userLogged else falso">
+            <app-login (logedOn)="logedOn($event)" ></app-login>
+        </div>
+        <ng-template #falso>
+            <img src="http://cdn.onlinewebfonts.com/svg/img_184513.png" width="20" alt="" #falso>
+            {{user}}
+            <button #falso>Cerrar Sesión</button>
+        </ng-template>
+    </div>
+    
 </div>

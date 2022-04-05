@@ -1,26 +1,22 @@
 <div class="content-cards">
-    <div class="fecha">
-        <p>Fecha: {{todayDate|date:'dd/MM/YYYY'}}</p>
-    </div>
-    <div class="movie-card" *ngFor="let student of students">
+    <div class="movie-card" *ngFor="let movie of movies">
         <div class="movie-card-item-content">
             <div class="movie-info">
                 <div class="image-loader">
                     <img
                         role="presentation"
-                        alt="user"
-                        src={{student.img}}
+                        alt="A CIEGAS"
+                        src={{movie.img}}
                     />
                 </div>
+                <div [ngClass]="movie.estado === 'estreno' ? 'movie-info-label': 'disable'">Estreno</div>
             </div>
             <div class="movies-description">
                 <div class="movies-description-title">
-                    {{student.nombre}} {{student.apellido}}
+                    {{movie.titulo}}
                 </div>
                 <div class="movies-description-extra">
-                    edad: {{student.edad}}
-                    <br>
-                    promedio: <span [ngClass]="student.promedio < 14 ? 'desaprobado': 'aprobado'">{{student.promedio}}</span>
+                    {{movie.genero}}, {{movie.duracion}}, {{movie.publico}}
                 </div>
             </div>
         </div>

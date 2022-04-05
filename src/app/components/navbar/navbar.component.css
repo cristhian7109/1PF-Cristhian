@@ -8,6 +8,27 @@
     padding: 16px;
     cursor: default;
 }
-.navbar img{
+.navbar .logo{
     width: 70px;
+}
+.navbar .user{
+    position: absolute;
+    right: 32px;
+    display: flex;
+    align-items: center;
+}
+.navbar .user button{
+    height: 40px;
+    width: 120px;
+    color: #fff;
+    border: solid 1px rgb(88, 88, 88);
+    background: #1a1a1a;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 16px;
+}
+.navbar .user img{
+    margin-right: 8px;
+    width: 40px;
+    height: 40px;
 }

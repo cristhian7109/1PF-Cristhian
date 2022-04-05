@@ -6,56 +6,40 @@ import { Component } from "@angular/core";
     styleUrls: ['./contenido.component.css']
 })
 export class ContenidoComponent{
-    students: any = [
+    movies: any = [
         {
-            nombre:"Cristhian",
-            apellido:"Ureta",
-            edad:24,
-            promedio:13,
-            img:"https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
+            titulo: "A CIEGAS",
+            genero: "THRILLER",
+            duracion: "1h 32min",
+            publico: "TBC.",
+            img: "https://cdn.apis.cineplanet.cl/CDN/media/entity/get/FilmPosterGraphic/HO00000766?referenceScheme=HeadOffice&amp;allowPlaceHolder=true",
+            estado: "estreno"
         },
         {
-            nombre:"Antony",
-            apellido:"Vasquez",
-            edad:25,
-            promedio:18,
-            img:"https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
+            titulo: "LOS TIPOS MALOS",
+            genero: "ANIMACIÓN",
+            duracion: "1h 40min",
+            publico: "TE.",
+            img: "https://cdn.apis.cineplanet.cl/CDN/media/entity/get/FilmPosterGraphic/HO00000776?referenceScheme=HeadOffice&allowPlaceHolder=true",
+            estado: "normal"
         },
         {
-            nombre:"Juan",
-            apellido:"Perez",
-            edad:24,
-            promedio:15,
-            img:"https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
+            titulo: "BATMAN",
+            genero: "ACCIÓN",
+            duracion: "2h 56min",
+            publico: "+14.",
+            img: "https://cdn.apis.cineplanet.cl/CDN/media/entity/get/FilmPosterGraphic/HO00000763?referenceScheme=HeadOffice&allowPlaceHolder=true",
+            estado: "estreno"
         },
         {
-            nombre:"Lucas",
-            apellido:"Trauco",
-            edad:23,
-            promedio:16,
-            img:"https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
+            titulo: "LOS TIPOS MALOS 2",
+            genero: "ANIMACIÓN",
+            duracion: "1h 60min",
+            publico: "TE.",
+            img: "https://cdn.apis.cineplanet.cl/CDN/media/entity/get/FilmPosterGraphic/HO00000776?referenceScheme=HeadOffice&allowPlaceHolder=true",
+            estado: "normal"
         },
-        {
-            nombre:"Gianfranco",
-            apellido:"Candamo",
-            edad:24,
-            promedio:17,
-            img:"https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
-        },
-        {
-            nombre:"Jorge",
-            apellido:"Flores",
-            edad:23,
-            promedio:14,
-            img:"https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
-        },
-        {
-            nombre:"Marco",
-            apellido:"Casas",
-            edad:23,
-            promedio:12,
-            img:"https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
-        },
+        
     ]
     todayDate=new Date()
 

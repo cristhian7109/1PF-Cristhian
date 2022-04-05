@@ -3,12 +3,8 @@
     overflow-y: auto;
     height: calc(100vh - 170px);
 }
-.content-cards .fecha{
-    position: relative;
-    left: 32px;
-    width: max-content;
-    font-size: 18px;
-    font-weight: bold;
+.disable{
+    display: none;
 }
 .movie-card{
     display: inline-block;
@@ -49,7 +45,6 @@
 }
 .movies-description{
     margin-top: 5px;
-    text-align: -webkit-center;
 }
 .movies-description-title{
     font-size: 18px;
@@ -60,12 +55,4 @@
     margin-top: 8px;
     font-size: 14px;
     font-family: sans-serif;
-}
-.desaprobado{
-    color: red;
-    font-weight: bold;
-}
-.aprobado{
-    color: green;
-    font-weight: bold;
 }

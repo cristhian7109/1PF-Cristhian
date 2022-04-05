@@ -1,0 +1,67 @@
+<div>
+  <button class="buttonLogin" (click)="openModal()">Iniciar Sesión</button>
+  <div ng-controller="modal" class="{{ modalClass }}">
+    <div class="modalBox">
+      <div class="containerlogin">
+        <h3>Iniciar Sesión</h3>
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit(usuario,contrasena)">
+          <div>
+            <label>Usuario:</label>
+            <input type="text" formControlName="usuario" #usuario/>
+          </div>
+          <p
+            class="incorrecto"
+            *ngIf="formGroup.get('usuario')?.errors?.['required']"
+          >
+            Este campo es obligatorio
+          </p>
+          <div>
+            <label>Contraseña:</label>
+            <input type="{{ typepass }}" formControlName="contrasena" #contrasena/>
+            <img
+              *ngIf="typepass === 'password'; else falso"
+              src="https://cdn.onlinewebfonts.com/svg/img_374055.png"
+              alt="mostrar"
+              (click)="mostrarContra()"
+            />
+            <ng-template #falso>
+              <img
+                src="http://cdn.onlinewebfonts.com/svg/img_374056.png"
+                alt="ocultar"
+                (click)="mostrarContra()"
+              />
+            </ng-template>
+          </div>
+          <p
+            class="incorrecto"
+            *ngIf="formGroup.get('contrasena')?.errors?.['required']"
+          >
+            Este campo es obligatorio
+          </p>
+          <p
+            class="incorrecto"
+            *ngIf="formGroup.get('contrasena')?.errors?.['minlength']"
+          >
+            Debe tener almenos 8 caracteres
+          </p>
+          <p *ngIf="incorrecto" class="incorrecto">
+            El Usuario o constraseña es incorrecto
+          </p>
+          <div>
+            <button class="cancelar" type="button" (click)="closeModal()">
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              [ngClass]="formGroup.get('contrasena')?.errors?.['minlength'] || 
+                        formGroup.get('contrasena')?.errors?.['required'] || 
+                        formGroup.get('usuario')?.errors?.['required']?'disable':''"
+            >
+              Confirmar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
