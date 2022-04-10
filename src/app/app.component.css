@@ -2,14 +2,21 @@
     grid-area: header
 }
 .grid-menu{
-    grid-area: menus
+    grid-area: menu;
+    width: 260px;
 }
 .grid-contenido{
-    grid-area: main
+    grid-area: main;
+    padding: 32px;
+    overflow-x: auto;
 }
 .grid-container{
     display: grid;
-    grid-template-areas: 
-    'header  header header header header header'
-    'menus main main main main main';
+    grid-template-columns: max-content;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        'header header'
+        'menu main';
+    height: 100vh;
+    /* padding-left: 220px */
 }

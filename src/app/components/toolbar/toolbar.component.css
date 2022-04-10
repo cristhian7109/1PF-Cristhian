@@ -1,7 +1,7 @@
 .toolbar{
     position:relative;
-    height: calc(100vh - 102px);
-    width: 220px;
+    height: calc(100vh - 72px);
+    width: 240px;
     background:#1a1a1a;
     box-shadow: 10px 0 0 #a17915;
     border-left: 10px solid #1a1a1a;

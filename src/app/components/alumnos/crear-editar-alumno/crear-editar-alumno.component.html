@@ -1,0 +1,48 @@
+<div ng-controller="modal" class="{{ modal }}">
+    <div class="modalBox">
+        <div class="containerModal">
+        <h3 *ngIf="typemodal==='add';else falsed" appTitles>Agregar Alumno</h3>
+        <ng-template #falsed>
+          <h3 appTitles>Editar Alumno</h3>
+        </ng-template>
+        <form [formGroup]="formGroup" (ngSubmit)="agregarAlumno(nombre,apellido,sexo,edad,promedio)">
+            <mat-form-field>
+              <mat-label>Nombres:</mat-label>
+              <input matInput type="text" ng-value="seleccionado.nombre" formControlName="nombre" #nombre/>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Apellidos:</mat-label>
+              <input matInput type="text" formControlName="apellido" #apellido/>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Sexo</mat-label>
+              <select matNativeControl required formControlName="sexo" #sexo>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+              </select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Edad:</mat-label>
+              <input matInput type="number" formControlName="edad" #edad/>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Promedio:</mat-label>
+              <input matInput type="number" formControlName="promedio" #promedio/>
+            </mat-form-field>
+            <div class="containerbtn">
+              <button mat-raised-button class="cancelar" type="button" (click)="closeModal()">
+                Cancelar
+              </button>
+              <button *ngIf="typemodal==='add';else btnfalse" [disabled]="formGroup.invalid" mat-raised-button style="background-color: #a17915;color: #fff;" type="submit">
+                Confirmar
+              </button>
+              <ng-template #btnfalse>
+                <button [disabled]="formGroup.invalid" mat-raised-button style="background-color: #a17915;color: #fff;" type="submit">
+                  Modificar
+                </button>
+              </ng-template>
+            </div>
+          </form>
+        </div>
+    </div>
+</div>
