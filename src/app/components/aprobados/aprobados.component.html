@@ -1,0 +1,18 @@
+<div>
+    <mat-toolbar class="containerToolbar">
+        <span appTitles>Alumnos Aprobados</span>
+    </mat-toolbar>
+    <div class="list-alum-container">
+       <div *ngFor="let aprobado of aprobados$ | async">
+            <mat-card class="item-alum">
+                <mat-card-title>
+                    {{{nombre:aprobado.nombre,apellido:aprobado.apellido} | conversor }}
+                </mat-card-title>
+                <mat-card-subtitle>
+                    promedio: <strong>{{aprobado.promedio}}</strong>
+                </mat-card-subtitle>
+            </mat-card>
+        </div> 
+    </div>
+    
+</div>

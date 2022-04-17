@@ -16,6 +16,8 @@ import { CrearEditarAlumnoComponent } from './components/alumnos/crear-editar-al
 import { EliminarAlumnoComponent } from './components/alumnos/eliminar-alumno/eliminar-alumno.component';
 import { TitlesDirective } from './titles.directive';
 import { ConversorPipe } from './pipes/conversor.pipe';
+import { AlumnoService } from './services/alumno.service';
+import { AprobadosComponent } from './components/aprobados/aprobados.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { ConversorPipe } from './pipes/conversor.pipe';
     NavbarComponent,
     LoginComponent,
     AlumnosComponent,
+    AprobadosComponent,
     ClasesComponent,
     CursosComponent,
     EliminarAlumnoComponent,
@@ -33,13 +36,15 @@ import { ConversorPipe } from './pipes/conversor.pipe';
     ConversorPipe
   ],
   imports: [
-  BrowserModule,
+    BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialModule,
   ],
-  providers: [],
+  providers: [
+    AlumnoService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

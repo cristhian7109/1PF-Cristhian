@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Alumno } from '../interfaces/alumnos';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +17,44 @@ export class AlumnoService {
     {id:4, nombre: "Ramon Alain", apellido: "Gonzales Roca", sexo: "Masculino", promedio: 13,edad:22},
     {id:3, nombre: "Alexander Matias", apellido: "Chico Borja", sexo: "Masculino", promedio: 14,edad:25},
     {id:2, nombre: "Debora Naroa", apellido: "Sans Benitez", sexo: "Femenino", promedio: 12,edad:23},
-    {id:1, nombre: "Sagrario Aurea", apellido: "Pons Castellano", sexo: "Femenino", promedio: 74,edad:20},
+    {id:1, nombre: "Sagrario Aurea", apellido: "Pons Castellano", sexo: "Femenino", promedio: 14,edad:20},
   ];
-  constructor() { }
+  listAlumnosPromise!:Promise<any>;
+  listAlumnos$!:Observable<Alumno[]>;
+
+  constructor() {
+
+    this.listAlumnos$ = new Observable((suscripcion)=>{
+      if(this.listAlumno.length > 0){
+        suscripcion.next(this.listAlumno)
+        suscripcion.complete()
+      }else{
+        suscripcion.error("no hay alumnos que enviar")
+      }
+    })
+
+    this.listAlumnosPromise = new Promise((res,rej)=>{
+      if(this.listAlumno.length > 0){
+        res(this.listAlumno);
+      }else{
+        rej(this.listAlumno);
+      }
+    });
+   }
 
   getAlumno(){
     return this.listAlumno.slice()  
+  }
+  getAlumnoPromise(){
+    return this.listAlumnosPromise
+  }
+  getAlumnoObservable(): Observable<Alumno[]>{
+    return this.listAlumnos$
+  }
+  getAlumnosAprobados(): Observable<Alumno[]>{
+    return this.listAlumnos$.pipe(
+      map(alums => alums.filter(alum => alum.promedio > 13))
+    );
   }
 
   eliminarAlumno(index: number){
@@ -39,15 +72,6 @@ export class AlumnoService {
     })
   }
   modificarAlumno(alumno:Alumno){
-    console.log(alumno);
     this.listAlumno[alumno.id] = alumno
-    // this.listAlumno.unshift({
-    //   id:this.listAlumno.length+1,
-    //   nombre:alumno.nombre,
-    //   apellido:alumno.apellido,
-    //   sexo:alumno.sexo,
-    //   edad:alumno.edad,
-    //   promedio:alumno.promedio
-    // })
   }
 }
