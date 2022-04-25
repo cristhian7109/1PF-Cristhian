@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { AlumnoService } from 'src/app/services/alumno.service';
-import { Alumno } from './../../interfaces/alumnos';
+import { Alumno } from 'src/app/core/interfaces/alumnos';
+import { AlumnoService } from 'src/app/core/services/alumno.service';
 @Component({
   selector: 'app-alumnos',
   templateUrl: './alumnos.component.html',

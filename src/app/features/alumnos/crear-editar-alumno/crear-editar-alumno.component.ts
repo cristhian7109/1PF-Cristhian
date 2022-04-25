@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Alumno } from 'src/app/interfaces/alumnos';
-import { AlumnoService } from 'src/app/services/alumno.service';
+import { Alumno } from 'src/app/core/interfaces/alumnos';
+import { AlumnoService } from 'src/app/core/services/alumno.service';
 
 @Component({
   selector: 'app-crear-editar-alumno',
