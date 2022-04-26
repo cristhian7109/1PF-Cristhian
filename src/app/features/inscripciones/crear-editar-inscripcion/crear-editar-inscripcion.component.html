@@ -1,0 +1,47 @@
+<div ng-controller="modal" class="{{ modal }}">
+    <div class="modalBox">
+        <div class="containerModal">
+        <h3 *ngIf="typemodal==='add';else falsed" appTitles>Agregar Inscripcion</h3>
+        <ng-template #falsed>
+          <h3 appTitles>Editar Inscripcion</h3>
+        </ng-template>
+        <form [formGroup]="formGroup" (ngSubmit)="agregarInscripcion(Curso,Alumno)">
+          <mat-form-field appearance="fill">
+            <mat-label>Alumno</mat-label>
+            <mat-select formControlName="idAlumno" #Alumno>
+              <mat-option
+                *ngFor="let alumno of alumnos$ | async"
+                [value]="alumno.id"
+              >
+                {{ alumno.nombre }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Curso</mat-label>
+            <mat-select formControlName="idCurso" #Curso>
+              <mat-option
+                *ngFor="let curso of cursos$ | async"
+                [value]="curso.id"
+              >
+                {{ curso.nombre }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+            <div class="containerbtn">
+              <button mat-raised-button class="cancelar" type="button" (click)="closeModal()">
+                Cancelar
+              </button>
+              <button *ngIf="typemodal==='add';else btnfalse" [disabled]="formGroup.invalid" mat-raised-button style="background-color: #a17915;color: #fff;" type="submit">
+                Confirmar
+              </button>
+              <ng-template #btnfalse>
+                <button [disabled]="formGroup.invalid" mat-raised-button style="background-color: #a17915;color: #fff;" type="submit">
+                  Modificar
+                </button>
+              </ng-template>
+            </div>
+          </form>
+        </div>
+    </div>
+</div>

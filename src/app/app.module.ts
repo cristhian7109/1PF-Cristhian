@@ -12,20 +12,28 @@ import { CrearEditarAlumnoComponent } from './features/alumnos/crear-editar-alum
 import { MaterialModule } from './core/app.material.module';
 import { CommonModule } from '@angular/common';
 import { CursosComponent } from './features/cursos/cursos.component';
-import { ContenidoComponent } from './features/contenido/contenido.component';
 import { AlumnoService } from './core/services/alumno.service';
 import { EliminarAlumnoComponent } from './features/alumnos/eliminar-alumno/eliminar-alumno.component';
+import { EliminarCursoComponent } from './features/cursos/eliminar-curso/eliminar-curso.component';
+import { CrearEditarCursoComponent } from './features/cursos/crear-editar-curso/crear-editar-curso.component';
+import { InscripcionComponent } from './features/inscripciones/inscripciones.component';
+import { EliminarInscripcionComponent } from './features/inscripciones/eliminar-inscripcion/eliminar-inscripcion.component';
+import { CrearEditarInscripcionComponent } from './features/inscripciones/crear-editar-inscripcion/crear-editar-inscripcion.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CursosComponent,
-    ContenidoComponent,
     AlumnosComponent,
     AprobadosComponent,
     ClasesComponent,
     EliminarAlumnoComponent,
     CrearEditarAlumnoComponent,
+    EliminarCursoComponent,
+    CrearEditarCursoComponent,
+    InscripcionComponent,
+    EliminarInscripcionComponent,
+    CrearEditarInscripcionComponent
   ],
   imports: [
     SharedModule,

@@ -1,0 +1,37 @@
+<div ng-controller="modal" class="{{ modal }}">
+    <div class="modalBox">
+        <div class="containerModal">
+        <h3 *ngIf="typemodal==='add';else falsed" appTitles>Agregar Curso</h3>
+        <ng-template #falsed>
+          <h3 appTitles>Editar Curso</h3>
+        </ng-template>
+        <form [formGroup]="formGroup" (ngSubmit)="agregarCurso(nombre,descripcion,duracion)">
+            <mat-form-field>
+              <mat-label>Nombre Curso:</mat-label>
+              <input matInput type="text" ng-value="seleccionado.nombre" formControlName="nombre" #nombre/>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Descripción:</mat-label>
+              <input matInput type="text" formControlName="descripcion" #descripcion/>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Duración en Días:</mat-label>
+              <input matInput type="number" formControlName="duracion" #duracion/>
+            </mat-form-field>
+            <div class="containerbtn">
+              <button mat-raised-button class="cancelar" type="button" (click)="closeModal()">
+                Cancelar
+              </button>
+              <button *ngIf="typemodal==='add';else btnfalse" [disabled]="formGroup.invalid" mat-raised-button style="background-color: #a17915;color: #fff;" type="submit">
+                Confirmar
+              </button>
+              <ng-template #btnfalse>
+                <button [disabled]="formGroup.invalid" mat-raised-button style="background-color: #a17915;color: #fff;" type="submit">
+                  Modificar
+                </button>
+              </ng-template>
+            </div>
+          </form>
+        </div>
+    </div>
+</div>

@@ -3,14 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { AlumnosComponent } from '../features/alumnos/alumnos.component';
 import { AprobadosComponent } from '../features/aprobados/aprobados.component';
 import { ClasesComponent } from '../features/clases/clases.component';
-import { ContenidoComponent } from '../features/contenido/contenido.component';
 import { CursosComponent } from '../features/cursos/cursos.component';
+import { InscripcionComponent } from '../features/inscripciones/inscripciones.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: ContenidoComponent 
-  },
   {
     path: 'alumnos',
     component: AlumnosComponent
@@ -26,6 +22,10 @@ const routes: Routes = [
   {
     path: 'clases',
     component: ClasesComponent
+  },
+  {
+    path: 'inscripciones',
+    component: InscripcionComponent
   }
 ];
 

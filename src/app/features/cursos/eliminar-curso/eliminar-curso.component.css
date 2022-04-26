@@ -1,0 +1,44 @@
+
+.closed{
+    opacity: 0;
+    display: none;
+}
+.open{
+    opacity: 1;
+    background: rgba(0,0,0,0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    size: 100%;
+    text-align: center;
+    transition: opacity 0.3s ease;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+}
+.modalBox{
+    /* background: white; */
+    size: 300px;
+    margin: 0 auto;
+    position: relative;
+    top: calc( 50% - 150px);
+    transform: translateY(-50%);
+}
+.containerModal{
+    margin: 10vh auto;
+    width: 500px;
+    background-color: #fff;
+    text-align: center;
+    padding: 32px;
+    border-radius: 16px;
+}
+
+.containerbtn{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+.containerbtn button{
+    width: 150px
+}

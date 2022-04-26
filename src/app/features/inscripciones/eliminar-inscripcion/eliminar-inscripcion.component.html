@@ -1,0 +1,17 @@
+
+<div ng-controller="modal" class="{{ modal }}">
+    <div class="modalBox">
+    <div class="containerModal">
+        <h3 appTitles>¿Desea Eliminar Este Inscripcion?</h3>
+        <div class="containerbtn">
+            <button mat-raised-button class="cancelar" type="button" (click)="closeModal()">
+              Cancelar
+            </button>
+            <button mat-raised-button style="background-color: #a17915;color: #fff;" (click)="eliminarInscripcion(id!)">
+              Confirmar
+            </button>
+          </div>
+    </div>
+    </div>
+</div>
+  
