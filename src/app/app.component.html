@@ -1,16 +1,13 @@
-<!-- <div class="grid-container">
+<div *ngIf="authService.isAuthenticated" class="grid-container">
   <app-navbar class="grid-header"></app-navbar>
   <app-toolbar class="grid-menu"></app-toolbar>
   <div class="grid-contenido">
     <router-outlet></router-outlet>
   </div>
-</div> -->
-<div *ngIf="authService.isAuthenticated | async; else noConnect">
-  <app-navbar class="grid-header"></app-navbar>
-  <app-toolbar class="grid-menu"></app-toolbar>
 </div>
-<ng-template #noConnect>
-  <div class="grid-contenido">
-  <router-outlet></router-outlet>
+
+<div *ngIf="!authService.isAuthenticated">
+  <app-login></app-login>
 </div>
-</ng-template>
+
+

@@ -5,7 +5,6 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ConversorPipe } from './pipes/conversor.pipe';
 import { AppRoutingModule } from '../core/app.routes.module';
-import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
@@ -14,14 +13,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     ToolbarComponent,
     NavbarComponent,
     ConversorPipe,
-    LoginComponent
   ],
   imports: [CommonModule, AppRoutingModule, MaterialModule,ReactiveFormsModule],
   exports: [
     ToolbarComponent,
     NavbarComponent,
     ConversorPipe,
-    // LoginComponent
   ],
 })
 export class SharedModule {}

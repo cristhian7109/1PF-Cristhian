@@ -20,6 +20,7 @@ import { InscripcionComponent } from './features/inscripciones/inscripciones.com
 import { EliminarInscripcionComponent } from './features/inscripciones/eliminar-inscripcion/eliminar-inscripcion.component';
 import { CrearEditarInscripcionComponent } from './features/inscripciones/crear-editar-inscripcion/crear-editar-inscripcion.component';
 import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component';
+import { LoginComponent } from './shared/login/login.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component
     InscripcionComponent,
     EliminarInscripcionComponent,
     CrearEditarInscripcionComponent,
-    NopagefoundComponent
+    NopagefoundComponent,
+    LoginComponent
   ],
   imports: [
     SharedModule,
