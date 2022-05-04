@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { AlumnoService } from 'src/app/core/services/alumno.service';
+import { AlumnosComponent } from '../alumnos.component';
 
 @Component({
   selector: 'app-eliminar-alumno',
@@ -9,10 +10,11 @@ import { AlumnoService } from 'src/app/core/services/alumno.service';
 export class EliminarAlumnoComponent implements OnInit {
 
   @Input() modal?: string;
-  @Input() id?: number;
+  @Input() alumno?: any;
   @Output() closeModalevent = new EventEmitter<string>();
 
-  constructor(private _alumnoService:AlumnoService) { }
+  constructor(private _alumnoService:AlumnoService,
+    private _mytable: AlumnosComponent) { }
 
   ngOnInit(): void {
   }
@@ -21,8 +23,14 @@ export class EliminarAlumnoComponent implements OnInit {
     this.closeModalevent.emit()
   } 
 
-  eliminarAlumno(id:number){
-    this._alumnoService.eliminarAlumno(id)
+  eliminarAlumno(alumno:any){
+    console.log(alumno);
+    
+    this._alumnoService.eliminarAlumno(alumno).subscribe((resp: any) => {
+      setTimeout(() => {
+        this._mytable.myTable.renderRows();
+      }, 300);
+    });
     this.closeModal()
   }
 

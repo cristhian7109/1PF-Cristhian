@@ -5,6 +5,7 @@ import { InscripcionService } from 'src/app/core/services/inscripcion.service';
 import { Observable } from 'rxjs';
 import { AlumnoService } from 'src/app/core/services/alumno.service';
 import { CursoService } from 'src/app/core/services/cursos.service';
+import { InscripcionComponent } from '../inscripciones.component';
 
 @Component({
   selector: 'app-crear-editar-inscripcion',
@@ -27,6 +28,7 @@ export class CrearEditarInscripcionComponent implements OnInit {
     private _alumnosService:AlumnoService,
     private _cursosService:CursoService,
     public fb: FormBuilder,
+    private _mytable: InscripcionComponent
     ) { 
       this.formGroup = fb.group({
         idAlumno: new FormControl('', [Validators.required]),
@@ -35,8 +37,8 @@ export class CrearEditarInscripcionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cursos$ = this._cursosService.getCursoObservable();
-    this.alumnos$ = this._alumnosService.getAlumnoObservable();
+    this.cursos$ = this._cursosService.getCurso();
+    this.alumnos$ = this._alumnosService.getAlumno();
     // this.formGroup.get('idCurso')?.setValue(this.seleccionado.idCurso)
     // this.formGroup.get('idAlumno')?.setValue(this.seleccionado.idAlumno)
   }
@@ -56,9 +58,17 @@ export class CrearEditarInscripcionComponent implements OnInit {
       nombreAlumno:Alumno.triggerValue
     }
     if(this.typemodal==="add"){
-      this._inscripcionService.agregarInscripcion(inscripcion)
+      this._inscripcionService.agregarInscripcion(inscripcion).subscribe((resp: any) => {
+        setTimeout(() => {
+          this._mytable.myTable.renderRows();
+        }, 300);
+      });
     }else{
-      this._inscripcionService.modificarInscripcion({...inscripcion,id:this.seleccionado.id})
+      this._inscripcionService.modificarInscripcion({...inscripcion,id:this.seleccionado.id}).subscribe((resp: any) => {
+        setTimeout(() => {
+          this._mytable.myTable.renderRows();
+        }, 300);
+      });
     }
     
     this.closeModal()

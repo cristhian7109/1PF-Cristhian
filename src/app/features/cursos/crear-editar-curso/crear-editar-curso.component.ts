@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Curso } from 'src/app/core/interfaces/cursos';
 import { CursoService } from 'src/app/core/services/cursos.service';
+import { CursosComponent } from '../cursos.component';
 
 @Component({
   selector: 'app-crear-editar-curso',
@@ -20,7 +21,8 @@ export class CrearEditarCursoComponent implements OnInit {
     duracion:new FormControl('',[Validators.required])
   })
   
-  constructor(private _cursoService:CursoService) { 
+  constructor(private _cursoService:CursoService,
+    private _mytable: CursosComponent) { 
   }
 
   ngOnInit(): void {
@@ -42,9 +44,17 @@ export class CrearEditarCursoComponent implements OnInit {
       duracion:duracion.value
     }
     if(this.typemodal==="add"){
-      this._cursoService.agregarCurso(curso)
+      this._cursoService.agregarCurso(curso).subscribe((resp: any) => {
+        setTimeout(() => {
+          this._mytable.myTable.renderRows();
+        }, 300);
+      });
     }else{
-      this._cursoService.modificarCurso({...curso,id:this.seleccionado.id})
+      this._cursoService.modificarCurso({...curso,id:this.seleccionado.id}).subscribe((resp: any) => {
+        setTimeout(() => {
+          this._mytable.myTable.renderRows();
+        }, 300);
+      });
     }
     
     this.closeModal()

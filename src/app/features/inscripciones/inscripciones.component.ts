@@ -1,18 +1,19 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Inscripcion } from 'src/app/core/interfaces/inscripcion';
 import { InscripcionService } from 'src/app/core/services/inscripcion.service';
+import { Observable, Subscription } from 'rxjs';
 @Component({
   selector: 'app-inscripciones',
   templateUrl: './inscripciones.component.html',
   styleUrls: ['./inscripciones.component.css']
 })
 export class InscripcionComponent implements OnInit {
-  listInscripcion: Inscripcion[] = []
-  listInscripcionPromise!: Promise<any>;
+  @ViewChild(MatTable) myTable!: MatTable<any>;
+  listInscripcion!: Observable<Inscripcion[]>
+  cursoSubscription!: Subscription;
   displayedColumns: string[] = ['id', 'idAlumno','nombreAlumno','idCurso', 'nombreCurso','acciones'];
-  dataSource!:  MatTableDataSource<any>;
   modalAddEdit: string = "closed"
   modalEliminar: string = "closed"
   typemodal: string = ""
@@ -26,9 +27,11 @@ export class InscripcionComponent implements OnInit {
     this.cargarInscripcions()
   }
 
-  openModal(tipo:string,index:number) {
+  openModal(tipo:string,data:any) {
+    console.log(data);
+    
     if( tipo==="edit" ){
-      this.seleccionado = {...this.listInscripcion[index],id:index}
+      this.seleccionado = data
     }else{
       this.seleccionado = {id:0, idCurso: 0, idAlumno: 0, nombreCurso: "", nombreAlumno: ""}
     }
@@ -39,8 +42,8 @@ export class InscripcionComponent implements OnInit {
     this.modalAddEdit= 'closed'
     this.cargarInscripcions()
   } 
-  openModalEliminar(index:number) {
-    this.seleccionado = {...this.listInscripcion[index],id:index}
+  openModalEliminar(id:number) {
+    this.seleccionado = {...this.seleccionado,id:id}
     this.modalEliminar= 'open'
   } 
   closeModalEliminar() {
@@ -48,25 +51,13 @@ export class InscripcionComponent implements OnInit {
     this.cargarInscripcions()
   } 
   cargarInscripcions(){
-    this.listInscripcionPromise = this._inscripcionService.getInscripcionPromise();
-    this.listInscripcionPromise
-    .then((curs)=>{
-      this.listInscripcion = curs
-    })
-    .catch((error)=>{
-      console.log("error",error);
-    })
-    .finally(()=>{
-      console.log("Finally");
-      this.dataSource = new MatTableDataSource(this.listInscripcion)
-      this.dataSource.paginator = this.paginator;
-    })
+    this.listInscripcion = this._inscripcionService.getInscripcion();
+    this.cursoSubscription = this._inscripcionService.suscripcionSubject.subscribe(
+      () => {
+        this.listInscripcion = this._inscripcionService.getInscripcion();
+      }
+    );
     
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }

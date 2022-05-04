@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { InscripcionService } from 'src/app/core/services/inscripcion.service';
+import { InscripcionComponent } from '../inscripciones.component';
 
 @Component({
   selector: 'app-eliminar-Inscripcion',
@@ -9,10 +10,11 @@ import { InscripcionService } from 'src/app/core/services/inscripcion.service';
 export class EliminarInscripcionComponent implements OnInit {
 
   @Input() modal?: string;
-  @Input() id?: number;
+  @Input() seleccionado?: any;
   @Output() closeModalevent = new EventEmitter<string>();
 
-  constructor(private _InscripcionService:InscripcionService) { }
+  constructor(private _InscripcionService:InscripcionService,
+    private _mytable: InscripcionComponent) { }
 
   ngOnInit(): void {
   }
@@ -21,8 +23,12 @@ export class EliminarInscripcionComponent implements OnInit {
     this.closeModalevent.emit()
   } 
 
-  eliminarInscripcion(id:number){
-    this._InscripcionService.eliminarInscripcion(id)
+  eliminarInscripcion(data:any){
+    this._InscripcionService.eliminarInscripcion(data).subscribe((resp: any) => {
+      setTimeout(() => {
+        this._mytable.myTable.renderRows();
+      }, 300);
+    });
     this.closeModal()
   }
 

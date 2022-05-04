@@ -4,12 +4,12 @@
         <button mat-raised-button class="btn_add" (click)="openModal('add',0)">Agregar</button>
     </mat-toolbar>
     <div class="table-container">
-      <mat-form-field>
+      <!-- <mat-form-field>
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
-      </mat-form-field>
+      </mat-form-field> -->
       <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource">
+        <table mat-table [dataSource]="listInscripcion">
             <ng-container matColumnDef="id">
               <th mat-header-cell  *matHeaderCellDef> ID </th>
               <td mat-cell *matCellDef="let element;let i = index"> {{element.id}} </td>
@@ -33,10 +33,10 @@
             <ng-container matColumnDef="acciones">
               <th mat-header-cell *matHeaderCellDef>  </th>
               <td mat-cell *matCellDef="let element; let i = index" style="text-align: right;"> 
-                  <a class="pointer" matTooltip="Editar Alumno" (click)="openModal('edit',i)">
+                  <a class="pointer" matTooltip="Editar Alumno" (click)="openModal('edit',element)">
                     <mat-icon>edit</mat-icon>
                   </a>
-                  <a class="pointer" matTooltip="Eliminar Alumno" (click)="openModalEliminar(i)"> 
+                  <a class="pointer" matTooltip="Eliminar Alumno" (click)="openModalEliminar(element.id)"> 
                     <mat-icon>delete</mat-icon>
                   </a>
               </td>
@@ -44,12 +44,12 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
-          <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+          <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]"
             showFirstLastButtons 
             aria-label="Select page of periodic elements">
-          </mat-paginator>
+          </mat-paginator> -->
       </div>
     </div>
     <app-crear-editar-inscripcion  *ngIf="modalAddEdit==='open'" (closeModalevent)="closeModal()" [modal]="modalAddEdit" [seleccionado]="seleccionado" [typemodal]="typemodal" ></app-crear-editar-inscripcion>
-    <app-eliminar-Inscripcion *ngIf="modalEliminar==='open'" (closeModalevent)="closeModalEliminar()" [modal]="modalEliminar" [id]="seleccionado.id"></app-eliminar-Inscripcion>
+    <app-eliminar-Inscripcion *ngIf="modalEliminar==='open'" (closeModalevent)="closeModalEliminar()" [modal]="modalEliminar" [seleccionado]="seleccionado"></app-eliminar-Inscripcion>
 </div>

@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Alumno } from 'src/app/core/interfaces/alumnos';
 import { AlumnoService } from 'src/app/core/services/alumno.service';
+import { AlumnosComponent } from '../alumnos.component';
 
 @Component({
   selector: 'app-crear-editar-alumno',
@@ -22,7 +23,8 @@ export class CrearEditarAlumnoComponent implements OnInit {
     promedio:new FormControl('',[Validators.required])
   })
   
-  constructor(private _alumnoService:AlumnoService) { 
+  constructor(private _alumnoService:AlumnoService,
+    private _mytable: AlumnosComponent,) { 
   }
 
   ngOnInit(): void {
@@ -48,9 +50,19 @@ export class CrearEditarAlumnoComponent implements OnInit {
       promedio:promedio.value
     }
     if(this.typemodal==="add"){
-      this._alumnoService.agregarAlumno(alumno)
+      this._alumnoService.agregarAlumno(alumno).subscribe((resp: any) => {
+        setTimeout(() => {
+          this._mytable.myTable.renderRows();
+        }, 300);
+        return;
+      });
     }else{
-      this._alumnoService.modificarAlumno({...alumno,id:this.seleccionado.id})
+      this._alumnoService.modificarAlumno({...alumno,id:this.seleccionado.id}).subscribe((resp: any) => {
+        setTimeout(() => {
+          this._mytable.myTable.renderRows();
+        }, 300);
+        return;
+      });
     }
     
     this.closeModal()

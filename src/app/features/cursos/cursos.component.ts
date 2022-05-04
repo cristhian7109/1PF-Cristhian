@@ -1,18 +1,19 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Curso } from 'src/app/core/interfaces/cursos';
 import { CursoService } from 'src/app/core/services/cursos.service';
+import { Subscription, Observable } from 'rxjs';
 @Component({
   selector: 'app-cursos',
   templateUrl: './cursos.component.html',
   styleUrls: ['./cursos.component.css']
 })
 export class CursosComponent implements OnInit {
-  listCurso: Curso[] = []
-  listCursoPromise!: Promise<any>;
+  @ViewChild(MatTable) myTable!: MatTable<any>;
+  listCurso!: Observable<Curso[]>
+  cursoSubscription!: Subscription;
   displayedColumns: string[] = ['id','nombre', 'descripcion', 'duracion','acciones'];
-  dataSource!:  MatTableDataSource<any>;
   modalAddEdit: string = "closed"
   modalEliminar: string = "closed"
   typemodal: string = ""
@@ -20,17 +21,15 @@ export class CursosComponent implements OnInit {
     id:0, nombre: "", descripcion: "", duracion:0
   }
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
   constructor(private _cursoService: CursoService) { }
 
   ngOnInit(): void {
     this.cargarCursos()
   }
 
-  openModal(tipo:string,index:number) {
+  openModal(tipo:string,data:any) {
     if( tipo==="edit" ){
-      this.seleccionado = {...this.listCurso[index],id:index}
+      this.seleccionado = data
     }else{
       this.seleccionado = {id:0, nombre: "", descripcion: "", duracion:0}
     }
@@ -41,8 +40,8 @@ export class CursosComponent implements OnInit {
     this.modalAddEdit= 'closed'
     this.cargarCursos()
   } 
-  openModalEliminar(index:number) {
-    this.seleccionado = {...this.listCurso[index],id:index}
+  openModalEliminar(id:number) {
+    this.seleccionado = {...this.seleccionado,id:id}
     this.modalEliminar= 'open'
   } 
   closeModalEliminar() {
@@ -50,25 +49,15 @@ export class CursosComponent implements OnInit {
     this.cargarCursos()
   } 
   cargarCursos(){
-    this.listCursoPromise = this._cursoService.getCursoPromise();
-    this.listCursoPromise
-    .then((curs)=>{
-      this.listCurso = curs
-    })
-    .catch((error)=>{
-      console.log("error",error);
-    })
-    .finally(()=>{
-      console.log("Finally");
-      this.dataSource = new MatTableDataSource(this.listCurso)
-      this.dataSource.paginator = this.paginator;
-    })
+    this.listCurso = this._cursoService.getCurso();
+    this.cursoSubscription = this._cursoService.cursoSubject.subscribe(
+      () => {
+        this.listCurso = this._cursoService.getCurso();
+      }
+    );
     
   }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  ngOnDestroy(): void {
+    this.cursoSubscription.unsubscribe();
   }
-
 }

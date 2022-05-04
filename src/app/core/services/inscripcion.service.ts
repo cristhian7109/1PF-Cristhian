@@ -1,62 +1,63 @@
 import { Injectable } from '@angular/core';
 import { Inscripcion } from '../interfaces/inscripcion';
-import { Observable } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InscripcionService {
 
-  listInscripcion: Inscripcion[] = [
-    {id:985, idCurso: 357, idAlumno: 652, nombreCurso: "React", nombreAlumno: "Ramon Alain"},
-  ];
-  listInscripcionsPromise!:Promise<any>;
-  listInscripcions$!:Observable<Inscripcion[]>;
+  private readonly ApiUrl='https://6271c5d2c455a64564b7a629.mockapi.io';
+  suscripcionSubject = new Subject<Inscripcion[]>();
+  
+  constructor(
+    private http: HttpClient
+  ) { }
 
-  constructor() {
-
-    this.listInscripcions$ = new Observable((suscripcion)=>{
-      if(this.listInscripcion.length > 0){
-        suscripcion.next(this.listInscripcion)
-        suscripcion.complete()
-      }else{
-        suscripcion.error("no hay inscripciones que enviar")
-      }
-    })
-
-    this.listInscripcionsPromise = new Promise((res,rej)=>{
-      if(this.listInscripcion.length > 0){
-        res(this.listInscripcion);
-      }else{
-        rej(this.listInscripcion);
-      }
-    });
-   }
-
-  getInscripcion(){
-    return this.listInscripcion.slice()  
-  }
-  getInscripcionPromise(){
-    return this.listInscripcionsPromise
-  }
-  getInscripcionObservable(): Observable<Inscripcion[]>{
-    return this.listInscripcions$
+  getInscripcion(): Observable<Inscripcion[]>{
+    return this.http.get<Inscripcion[]>(this.ApiUrl+'/suscripcion');
   }
 
-  eliminarInscripcion(index: number){
-    this.listInscripcion.splice(index,1)
+  eliminarInscripcion(suscripcion: any){
+    return this.http
+      .delete(`${this.ApiUrl}/suscripcion/${suscripcion.id}`, suscripcion)
+      .pipe(
+        tap(
+          {
+            next: () => {
+              this.suscripcionSubject.next(suscripcion);
+            },
+            error: (error) => console.log(error),
+          }
+        )
+      );
   }
 
-  agregarInscripcion(alumno:Inscripcion){
-    this.listInscripcion.unshift({
-      id:  Math.floor(Math.random() * (999 - 100)) + 100,
-      idCurso:alumno.idCurso,
-      idAlumno:alumno.idAlumno,
-      nombreCurso:alumno.nombreCurso,
-      nombreAlumno:alumno.nombreAlumno
-    })
+  agregarInscripcion(suscripcion:any){
+    return this.http.post(`${this.ApiUrl}/suscripcion`, suscripcion).pipe(
+      tap(
+        {
+          next: () => {
+            this.suscripcionSubject.next(suscripcion);
+          },
+          error: (error) => console.log(error),
+        }
+      )
+    );
   }
-  modificarInscripcion(alumno:Inscripcion){
-    this.listInscripcion[alumno.id] = alumno
+  modificarInscripcion(suscripcion:any){
+    return this.http
+      .put(`${this.ApiUrl}/suscripcion/${suscripcion.id}`, suscripcion)
+      .pipe(
+        tap(
+          {
+            next: () => {
+              this.suscripcionSubject.next(suscripcion)
+            },
+            error: (error) => console.log(error),
+          }
+        )
+      );
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { Subscription, Observable } from 'rxjs';
 import { Alumno } from 'src/app/core/interfaces/alumnos';
 import { AlumnoService } from 'src/app/core/services/alumno.service';
 @Component({
@@ -9,10 +10,11 @@ import { AlumnoService } from 'src/app/core/services/alumno.service';
   styleUrls: ['./alumnos.component.css']
 })
 export class AlumnosComponent implements OnInit {
-  listAlumno: Alumno[] = []
-  listAlumnoPromise!: Promise<any>;
+  @ViewChild(MatTable) myTable!: MatTable<any>;
+
+  listAlumno!:  Observable<Alumno[]>
+  alumnSubscription!: Subscription;
   displayedColumns: string[] = ['id','nombre', 'edad', 'sexo', 'promedio', 'acciones'];
-  dataSource!:  MatTableDataSource<any>;
   modalAddEdit: string = "closed"
   modalEliminar: string = "closed"
   typemodal: string = ""
@@ -20,17 +22,15 @@ export class AlumnosComponent implements OnInit {
     id:0, nombre: "", apellido: "", sexo: "", promedio: 0, edad:0
   }
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
   constructor(private _alumnoService: AlumnoService) { }
 
   ngOnInit(): void {
     this.cargarAlumnos()
   }
 
-  openModal(tipo:string,index:number) {
+  openModal(tipo:string,data:any) {
     if( tipo==="edit" ){
-      this.seleccionado = {...this.listAlumno[index],id:index}
+      this.seleccionado = data
     }else{
       this.seleccionado = {id:0, nombre: "", apellido: "", sexo: "", promedio: 0, edad:0}
     }
@@ -41,8 +41,8 @@ export class AlumnosComponent implements OnInit {
     this.modalAddEdit= 'closed'
     this.cargarAlumnos()
   } 
-  openModalEliminar(index:number) {
-    this.seleccionado = {...this.listAlumno[index],id:index}
+  openModalEliminar(id:number) {
+    this.seleccionado = {...this.seleccionado,id:id}
     this.modalEliminar= 'open'
   } 
   closeModalEliminar() {
@@ -51,17 +51,13 @@ export class AlumnosComponent implements OnInit {
   } 
   cargarAlumnos(){
     this.listAlumno = this._alumnoService.getAlumno();
-    this.dataSource = this._alumnoService.getAlumno();
     this.alumnSubscription = this._alumnoService.alumnoSubject.subscribe(
       () => {
         this.listAlumno = this._alumnoService.getAlumno();
       }
     );
   }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  ngOnDestroy(): void {
+    this.alumnSubscription.unsubscribe();
   }
-
 }
