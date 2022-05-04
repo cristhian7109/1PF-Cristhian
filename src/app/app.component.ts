@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = '1PF-Ureta';
-
-  constructor(){}
+  other_content: boolean = false;
+  constructor(public authService: AuthService){}
 }

@@ -5,28 +5,45 @@ import { AprobadosComponent } from '../features/aprobados/aprobados.component';
 import { ClasesComponent } from '../features/clases/clases.component';
 import { CursosComponent } from '../features/cursos/cursos.component';
 import { InscripcionComponent } from '../features/inscripciones/inscripciones.component';
+import { LoginComponent } from '../shared/login/login.component';
+import { NopagefoundComponent } from '../shared/nopagefound/nopagefound.component';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   {
     path: 'alumnos',
-    component: AlumnosComponent
+    component: AlumnosComponent,
+    canActivate: [LoginGuard]
   },
   {
     path: 'alumnos_aprobados',
-    component: AprobadosComponent
+    component: AprobadosComponent,
+    canActivate: [LoginGuard]
   },
   {
     path: 'cursos',
-    component: CursosComponent
+    component: CursosComponent,
+    canActivate: [LoginGuard]
   },
   {
     path: 'clases',
-    component: ClasesComponent
+    component: ClasesComponent,
+    canActivate: [LoginGuard]
   },
   {
     path: 'inscripciones',
-    component: InscripcionComponent
-  }
+    component: InscripcionComponent,
+    canActivate: [LoginGuard]
+  },
+  { 
+    path: 'login', 
+    component: LoginComponent, 
+    pathMatch: 'full' 
+  },
+  { 
+    path: '**', 
+    component: NopagefoundComponent
+  },
 ];
 
 @NgModule({

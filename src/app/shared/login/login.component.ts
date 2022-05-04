@@ -1,5 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Usuario } from 'src/app/core/interfaces/usuario';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,10 +18,12 @@ export class LoginComponent implements OnInit {
     contrasena:new FormControl('',[Validators.required, Validators.minLength(8)])
   })
 
-  modalClass:string="closed"
+  modalClass:string="open"
   typepass:string="password"
   incorrecto:boolean=false
-  constructor() { }
+  constructor(public fb: FormBuilder,
+    private authService: AuthService,
+    private ruta: Router) { }
 
   openModal() {
     this.modalClass= 'open'
@@ -36,12 +41,17 @@ export class LoginComponent implements OnInit {
 
   onSubmit(usuario:any,contrasena:any){
     this.incorrecto=false
-    if(usuario.value==="admin" && contrasena.value==="admin123"){
-      this.closeModal()
-      this.logedOn.emit(usuario.value)
-    }else{
-      this.incorrecto=true
-    }
+      // this.closeModal()
+      this.authService
+      .IniciarSesion(usuario.value, contrasena.value)
+      .subscribe((data: Usuario[]) => {
+        if (data.length === 1) {
+          console.log('Usuario logueado exitosamente', data);
+          this.authService.establecerSesion(true, data[0]);
+        } else {
+          console.log('Error de autenticación');
+        }
+      });
   }
   ngOnInit(): void {
   }

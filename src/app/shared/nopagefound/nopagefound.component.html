@@ -1,0 +1,27 @@
+<body>
+  <div class="container">
+    <div class="inner">
+      <div class="grid">
+        <div class="cell" id="write">
+          <h2><b>404.</b> Esto es un error.</h2>
+          <h3>La URL requerida no funciona en este servidor.</h3>
+          <h3>Eso es todo lo que sabemos.</h3>
+          <div>
+            <button
+              *ngIf="!sesionActiva"
+              mat-button
+              class="menu-botton"
+              (click)="iraLogin()"
+            >
+              <mat-icon>exit_to_app</mat-icon>
+              <span>Volver a Login</span>
+            </button>
+          </div>
+        </div>
+        <div class="cell">
+          <img src="https://s3.getstickerpack.com/storage/uploads/sticker-pack/random-stickers-2/4.png?04145280c559942a96ca44353c032ccc&d=200x200" />
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
