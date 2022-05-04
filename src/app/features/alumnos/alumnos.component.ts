@@ -50,20 +50,13 @@ export class AlumnosComponent implements OnInit {
     this.cargarAlumnos()
   } 
   cargarAlumnos(){
-    this.listAlumnoPromise = this._alumnoService.getAlumnoPromise();
-    this.listAlumnoPromise
-    .then((alums)=>{
-      this.listAlumno = alums
-    })
-    .catch((error)=>{
-      console.log("error",error);
-    })
-    .finally(()=>{
-      console.log("Finally");
-      this.dataSource = new MatTableDataSource(this.listAlumno)
-      this.dataSource.paginator = this.paginator;
-    })
-    
+    this.listAlumno = this._alumnoService.getAlumno();
+    this.dataSource = this._alumnoService.getAlumno();
+    this.alumnSubscription = this._alumnoService.alumnoSubject.subscribe(
+      () => {
+        this.listAlumno = this._alumnoService.getAlumno();
+      }
+    );
   }
 
   applyFilter(event: Event) {
