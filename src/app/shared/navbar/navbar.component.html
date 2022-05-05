@@ -1,9 +1,16 @@
 <div class="navbar">
     <!-- <img class="logo" src="https://i.pinimg.com/originals/b1/01/76/b10176c5d94d990405d52ac2bfadfa82.png"  width="100" alt=""> -->
     Proyecto Final 1
-    <div class="user" *ngIf="authService.isAuthenticateduser | async;" >
+    <div class="user" *ngIf="_AuthService.isAuthenticatedSrc | async;" >
         <img src="http://cdn.onlinewebfonts.com/svg/img_184513.png" width="20" alt="">
-        {{authService.isAuthenticateduser }}
+        <div *ngFor="let user of user$ | async">
+            <div *ngIf="user.activa else falsed">
+                {{user.usuario.nombre + ' ' + user.usuario.apellido }}
+            </div>
+            <ng-template #falsed>
+                {{usernombre}}
+            </ng-template>
+        </div>
         <button (click)="logedOff()" >Cerrar Sesión</button>
     </div>
     

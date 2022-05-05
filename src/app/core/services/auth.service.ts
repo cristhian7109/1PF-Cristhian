@@ -13,38 +13,37 @@ export class AuthService {
   private readonly ApiUrl='https://6271c5d2c455a64564b7a629.mockapi.io';
   sesion: any = {
     activa: false,
-    usuario: {},
+    usuario: {
+    },
   };
-
+  sesion2: any[] = [{
+    activa: false,
+    usuario: {
+    },
+  }]
+  Usuario$!:Observable<any[]>;
   rol: any;
 
   isAuthenticatedSrc: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     JSON.parse(localStorage.getItem('session') || 'false')
   );
-  isAuthenticatedUser: BehaviorSubject<Sesion> = new BehaviorSubject<Sesion>(
-    JSON.parse(localStorage.getItem('session') || 'false').usuario.nombre
-  );
 
   get isAuthenticated(): Observable<boolean> {
     return this.isAuthenticatedSrc.asObservable();
   }
-  get isAuthenticateduser(): Observable<Sesion> {
-    return this.isAuthenticatedUser.asObservable();
-  }
+
+ 
 
   constructor(private http: HttpClient, private ruta: Router) {
-    var values = JSON.parse(localStorage.getItem('session') || 'false');
-    if (values.usuario !== undefined) {
-      if (values.usuario.rol === 1) {
-        this.rol = true;
-      } else {
-        this.rol = false;
-      }
-    } else {
-      this.rol = false;
-    }
+    this.Usuario$ = new Observable((suscripcion)=>{
+        suscripcion.next(this.sesion2)
+        suscripcion.complete()
+    })
   }
-
+  getSesion(): Observable<any[]>{
+    console.log(this.Usuario$);
+    return this.Usuario$
+  }
   //Inicio de sesión del usuario.
   IniciarSesion(usuario: string, contrasena: string): Observable<Usuario[]> {
     return this.http
@@ -90,6 +89,10 @@ export class AuthService {
       activa: sesionActiva,
       usuario: usuario,
     };
+    this.sesion2 = [{
+      activa: sesionActiva,
+      usuario: usuario,
+    }]
     localStorage.setItem('session', JSON.stringify(this.sesion));
     this.ruta.navigate(['']);
   }
