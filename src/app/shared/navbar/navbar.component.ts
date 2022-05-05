@@ -1,4 +1,6 @@
 import { Component  } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,18 +8,17 @@ import { Component  } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-
-
   userLogged: boolean=false;
   user: string='';
 
-  constructor() { }
-  logedOn($event:string){
-    this.userLogged= true
-    this.user=$event
+  constructor(public _AuthService: AuthService,private ruta: Router,public authService: AuthService) {
+    var dataSesion : any = JSON.parse(localStorage.getItem('session')!);
+    this.userLogged = dataSesion?.activa;
+    this.user = dataSesion?.usuario.nombre + ' ' + dataSesion?.usuario.apellido;
   }
+
   logedOff(){
-    this.userLogged= false
+    this._AuthService.CerrarSesion();
   }
 
   ngOnInit(): void {

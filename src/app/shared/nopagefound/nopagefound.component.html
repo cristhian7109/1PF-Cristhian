@@ -1,5 +1,5 @@
-<body>
-  <div class="container">
+<div class="open">
+  <div class="modalBox container">
     <div class="inner">
       <div class="grid">
         <div class="cell" id="write">
@@ -8,14 +8,24 @@
           <h3>Eso es todo lo que sabemos.</h3>
           <div>
             <button
-              *ngIf="!sesionActiva"
+              *ngIf="!sesionActiva else falsed"
               mat-button
               class="menu-botton"
-              (click)="iraLogin()"
+              (click)="goLogin()"
             >
               <mat-icon>exit_to_app</mat-icon>
               <span>Volver a Login</span>
             </button>
+            <ng-template #falsed>
+              <button
+                mat-button
+                class="menu-botton"
+                (click)="goIndex()"
+              >
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Volver a la pagina Principal</span>
+              </button>
+            </ng-template>
           </div>
         </div>
         <div class="cell">
@@ -24,4 +34,4 @@
       </div>
     </div>
   </div>
-</body>
+</div>

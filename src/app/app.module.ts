@@ -7,7 +7,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { AlumnosComponent } from './features/alumnos/alumnos.component';
 import { AprobadosComponent } from './features/aprobados/aprobados.component';
-import { ClasesComponent } from './features/clases/clases.component';
+import { IndexComponent } from './features/index/index.component';
 import { CrearEditarAlumnoComponent } from './features/alumnos/crear-editar-alumno/crear-editar-alumno.component';
 import { MaterialModule } from './core/app.material.module';
 import { CommonModule } from '@angular/common';
@@ -28,7 +28,7 @@ import { LoginComponent } from './shared/login/login.component';
     CursosComponent,
     AlumnosComponent,
     AprobadosComponent,
-    ClasesComponent,
+    IndexComponent,
     EliminarAlumnoComponent,
     CrearEditarAlumnoComponent,
     EliminarCursoComponent,

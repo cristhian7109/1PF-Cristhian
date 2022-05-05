@@ -22,15 +22,8 @@ export class LoginComponent implements OnInit {
   typepass:string="password"
   incorrecto:boolean=false
   constructor(public fb: FormBuilder,
-    private authService: AuthService,
-    private ruta: Router) { }
+    private authService: AuthService) { }
 
-  openModal() {
-    this.modalClass= 'open'
-  } 
-  closeModal() {
-    this.modalClass= 'closed'
-  } 
   mostrarContra(){
     if(this.typepass==="password"){
       this.typepass="text"

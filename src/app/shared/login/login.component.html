@@ -48,16 +48,13 @@
             El Usuario o constraseña es incorrecto
           </p>
           <div>
-            <button class="cancelar" type="button" (click)="closeModal()">
-              Cancelar
-            </button>
             <button
               type="submit"
               [ngClass]="formGroup.get('contrasena')?.errors?.['minlength'] || 
                         formGroup.get('contrasena')?.errors?.['required'] || 
                         formGroup.get('usuario')?.errors?.['required']?'disable':''"
             >
-              Confirmar
+              INGRESAR
             </button>
           </div>
         </form>

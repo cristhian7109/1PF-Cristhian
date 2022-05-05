@@ -1,12 +1,10 @@
 <div class="navbar">
     <!-- <img class="logo" src="https://i.pinimg.com/originals/b1/01/76/b10176c5d94d990405d52ac2bfadfa82.png"  width="100" alt=""> -->
     Proyecto Final 1
-    <div class="user" >
-        <ng-template *ngIf="!userLogged">
-            <img src="http://cdn.onlinewebfonts.com/svg/img_184513.png" width="20" alt="">
-            {{user}}
-            <button (click)="logedOff()" >Cerrar Sesión</button>
-        </ng-template>
+    <div class="user" *ngIf="authService.isAuthenticateduser | async;" >
+        <img src="http://cdn.onlinewebfonts.com/svg/img_184513.png" width="20" alt="">
+        {{authService.isAuthenticateduser }}
+        <button (click)="logedOff()" >Cerrar Sesión</button>
     </div>
     
 </div>

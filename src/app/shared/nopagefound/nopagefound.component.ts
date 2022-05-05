@@ -11,8 +11,10 @@ export class NopagefoundComponent {
   constructor(private ruta: Router) {
     this.sesionActiva = localStorage.getItem('session') ? true : false;
   }
-
-  iraLogin() {
+  goLogin() {
     this.ruta.navigate(['login']);
+  }
+  goIndex(){
+    this.ruta.navigate(['']);
   }
 }

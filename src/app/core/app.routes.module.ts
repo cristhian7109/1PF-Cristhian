@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AlumnosComponent } from '../features/alumnos/alumnos.component';
 import { AprobadosComponent } from '../features/aprobados/aprobados.component';
-import { ClasesComponent } from '../features/clases/clases.component';
+import { IndexComponent } from '../features/index/index.component';
 import { CursosComponent } from '../features/cursos/cursos.component';
 import { InscripcionComponent } from '../features/inscripciones/inscripciones.component';
 import { LoginComponent } from '../shared/login/login.component';
@@ -26,11 +26,6 @@ const routes: Routes = [
     canActivate: [LoginGuard]
   },
   {
-    path: 'clases',
-    component: ClasesComponent,
-    canActivate: [LoginGuard]
-  },
-  {
     path: 'inscripciones',
     component: InscripcionComponent,
     canActivate: [LoginGuard]
@@ -39,6 +34,11 @@ const routes: Routes = [
     path: 'login', 
     component: LoginComponent, 
     pathMatch: 'full' 
+  },
+  { 
+    path: '' ,
+    component: IndexComponent,
+    canActivate: [LoginGuard]
   },
   { 
     path: '**', 

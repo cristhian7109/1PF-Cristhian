@@ -2,11 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { Sesion } from '../interfaces/sesion';
 import { Usuario } from '../interfaces/usuario';
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class AuthService {
   private readonly ApiUrl='https://6271c5d2c455a64564b7a629.mockapi.io';
   sesion: any = {
@@ -19,13 +21,15 @@ export class AuthService {
   isAuthenticatedSrc: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     JSON.parse(localStorage.getItem('session') || 'false')
   );
+  isAuthenticatedUser: BehaviorSubject<Sesion> = new BehaviorSubject<Sesion>(
+    JSON.parse(localStorage.getItem('session') || 'false').usuario.nombre
+  );
 
   get isAuthenticated(): Observable<boolean> {
     return this.isAuthenticatedSrc.asObservable();
   }
-
-  get isAdmin(): Observable<boolean> {
-    return this.rol;
+  get isAuthenticateduser(): Observable<Sesion> {
+    return this.isAuthenticatedUser.asObservable();
   }
 
   constructor(private http: HttpClient, private ruta: Router) {
@@ -87,6 +91,6 @@ export class AuthService {
       usuario: usuario,
     };
     localStorage.setItem('session', JSON.stringify(this.sesion));
-    this.ruta.navigate(['alumnos']);
+    this.ruta.navigate(['']);
   }
 }

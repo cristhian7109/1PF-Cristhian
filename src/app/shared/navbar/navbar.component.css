@@ -17,6 +17,7 @@
     right: 32px;
     display: flex;
     align-items: center;
+    font-size: 24px;
 }
 .navbar .user button{
     height: 40px;
