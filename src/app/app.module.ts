@@ -7,7 +7,6 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { AlumnosComponent } from './features/alumnos/alumnos.component';
 import { AprobadosComponent } from './features/aprobados/aprobados.component';
-import { IndexComponent } from './features/index/index.component';
 import { CrearEditarAlumnoComponent } from './features/alumnos/crear-editar-alumno/crear-editar-alumno.component';
 import { MaterialModule } from './core/app.material.module';
 import { CommonModule } from '@angular/common';
@@ -19,8 +18,10 @@ import { CrearEditarCursoComponent } from './features/cursos/crear-editar-curso/
 import { InscripcionComponent } from './features/inscripciones/inscripciones.component';
 import { EliminarInscripcionComponent } from './features/inscripciones/eliminar-inscripcion/eliminar-inscripcion.component';
 import { CrearEditarInscripcionComponent } from './features/inscripciones/crear-editar-inscripcion/crear-editar-inscripcion.component';
-import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component';
 import { LoginComponent } from './shared/login/login.component';
+import { IndexComponent } from './features/index/index.component';
+import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component';
+import { AppRoutingModule } from './app.routing.module';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { LoginComponent } from './shared/login/login.component';
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    AppRoutingModule
   ],
   providers: [AlumnoService],
   bootstrap: [AppComponent]

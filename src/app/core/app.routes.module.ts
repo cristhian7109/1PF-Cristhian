@@ -1,53 +1,42 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AlumnosComponent } from '../features/alumnos/alumnos.component';
 import { AprobadosComponent } from '../features/aprobados/aprobados.component';
 import { IndexComponent } from '../features/index/index.component';
 import { CursosComponent } from '../features/cursos/cursos.component';
 import { InscripcionComponent } from '../features/inscripciones/inscripciones.component';
 import { LoginComponent } from '../shared/login/login.component';
-import { NopagefoundComponent } from '../shared/nopagefound/nopagefound.component';
 import { LoginGuard } from './guards/login.guard';
+import { AlumnosComponent } from '../features/alumnos/alumnos.component';
 
 const routes: Routes = [
   {
     path: 'alumnos',
-    component: AlumnosComponent,
-    canActivate: [LoginGuard]
+    children: [
+      {path: '', canActivate: [LoginGuard], component: AlumnosComponent}
+    ]
   },
   {
     path: 'alumnos_aprobados',
-    component: AprobadosComponent,
-    canActivate: [LoginGuard]
+    children: [
+      {path: '', canActivate: [LoginGuard], component: AprobadosComponent}
+    ]
   },
   {
     path: 'cursos',
-    component: CursosComponent,
-    canActivate: [LoginGuard]
+    children: [
+      {path: '', canActivate: [LoginGuard], component: CursosComponent}
+    ]
   },
   {
     path: 'inscripciones',
-    component: InscripcionComponent,
-    canActivate: [LoginGuard]
-  },
-  { 
-    path: 'login', 
-    component: LoginComponent, 
-    pathMatch: 'full' 
-  },
-  { 
-    path: '' ,
-    component: IndexComponent,
-    canActivate: [LoginGuard]
-  },
-  { 
-    path: '**', 
-    component: NopagefoundComponent
+    children: [
+      {path: '', canActivate: [LoginGuard], component: InscripcionComponent}
+    ]
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {  }
