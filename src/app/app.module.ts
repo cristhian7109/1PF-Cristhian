@@ -23,6 +23,12 @@ import { IndexComponent } from './features/index/index.component';
 import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component';
 import { AppRoutingModule } from './app.routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { ROOT_REDUCERS } from './core/state/app.state';
+import {appEffects} from "./core/state/app.effect";
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -50,7 +56,14 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     CommonModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot(ROOT_REDUCERS),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+      name: 'Cargar y cursos cargados en la lista',
+    }),
+    EffectsModule.forRoot(appEffects),
   ],
   providers: [AlumnoService],
   bootstrap: [AppComponent]

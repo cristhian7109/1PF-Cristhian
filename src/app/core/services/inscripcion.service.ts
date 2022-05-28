@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Inscripcion } from '../interfaces/inscripcion';
 import { Observable, Subject, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from './../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,11 @@ export class InscripcionService {
   getInscripcion(): Observable<Inscripcion[]>{
     return this.http.get<Inscripcion[]>(this.ApiUrl+'/suscripcion');
   }
-
+  getInscripcionXcurso(inscripcion: any): Observable<any> {
+    return this.http.get<any>(
+      `${this.ApiUrl}/Inscripciones?idCurso=${inscripcion.idCurso}`
+    );
+  }
   eliminarInscripcion(suscripcion: any){
     return this.http
       .delete(`${this.ApiUrl}/suscripcion/${suscripcion.id}`, suscripcion)
