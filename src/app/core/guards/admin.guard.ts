@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  Router,
-  RouterStateSnapshot,
-  UrlTree,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
@@ -24,7 +18,6 @@ export class AdminGuard implements CanActivate {
     | boolean
     | UrlTree {
     if (this.authService.rol === 1 || this.authService.rol === true) {
-      // 1 or true: Rol Admin
       return true;
     } else {
       this.authService.CerrarSesion();

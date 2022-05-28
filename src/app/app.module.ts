@@ -22,6 +22,7 @@ import { LoginComponent } from './shared/login/login.component';
 import { IndexComponent } from './features/index/index.component';
 import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component';
 import { AppRoutingModule } from './app.routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { AppRoutingModule } from './app.routing.module';
     MaterialModule,
     ReactiveFormsModule,
     CommonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [AlumnoService],
   bootstrap: [AppComponent]

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "lista-Ureta": {
+    "1PF-Ureta": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/lista-ureta",
+            "outputPath": "dist/1PF-Ureta",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "lista-Ureta:build:production"
+              "browserTarget": "1PF-Ureta:build:production"
             },
             "development": {
-              "browserTarget": "lista-Ureta:build:development"
+              "browserTarget": "1PF-Ureta:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "lista-Ureta:build"
+            "browserTarget": "1PF-Ureta:build"
           }
         },
         "test": {
@@ -104,5 +104,5 @@
       }
     }
   },
-  "defaultProject": "lista-Ureta"
+  "defaultProject": "1PF-Ureta"
 }
