@@ -29,6 +29,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { ROOT_REDUCERS } from './core/state/app.state';
 import {appEffects} from "./core/state/app.effect";
 import { environment } from '../environments/environment';
+import { ContenidoComponent } from './features/contenido/contenido.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { environment } from '../environments/environment';
     EliminarInscripcionComponent,
     CrearEditarInscripcionComponent,
     NopagefoundComponent,
-    LoginComponent
+    LoginComponent,
+    ContenidoComponent
   ],
   imports: [
     SharedModule,

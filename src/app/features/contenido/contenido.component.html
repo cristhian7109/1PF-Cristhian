@@ -1,0 +1,26 @@
+<div class="content-cards">
+    <div class="movie-card" *ngFor="let curso of cursos | async">
+        <div class="movie-card-item-content">
+            <div class="movie-info">
+                <div class="image-loader">
+                    <img
+                        role="presentation"
+                        alt="A CIEGAS"
+                        src="https://i.ytimg.com/vi/7TKY-jksHRQ/maxresdefault.jpg"
+                    />
+                </div>
+            </div>
+            <div class="movies-description">
+                <div class="movies-description-title">
+                    {{curso.nombreCurso}}
+                </div>
+                <div class="movies-description-extra">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                    when an unknown printer took a galley of type and scrambled it to make a type 
+                    specimen book.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

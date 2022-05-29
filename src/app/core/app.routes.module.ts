@@ -7,6 +7,7 @@ import { InscripcionComponent } from '../features/inscripciones/inscripciones.co
 import { LoginComponent } from '../shared/login/login.component';
 import { LoginGuard } from './guards/login.guard';
 import { AlumnosComponent } from '../features/alumnos/alumnos.component';
+import { ContenidoComponent } from '../features/contenido/contenido.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,12 @@ const routes: Routes = [
     path: 'inscripciones',
     children: [
       {path: '', canActivate: [LoginGuard], component: InscripcionComponent}
+    ]
+  },
+  {
+    path: 'cursosXAlumno',
+    children: [
+      {path: '', canActivate: [LoginGuard], component: ContenidoComponent}
     ]
   },
 ];

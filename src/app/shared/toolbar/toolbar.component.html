@@ -1,29 +1,31 @@
-<div class="toolbar">
-    <ul>
+
+<div *ngIf="_AuthService.isAuthenticatedSrc | async;" >
+  <div *ngFor="let u of user$ | async" class="toolbar">
+    <ul *ngIf="u.usuario.rol === 2 || rol === 2 else falsedad">
+      <li class="list" routerLinkActive="active">
+        <a routerLink="/alumnos"  >
+          <span class="title">Alumnos</span>  
+        </a>
+      </li>
+      <li class="list" routerLinkActive="active">
+        <a routerLink="/cursos">
+          <span class="title">Cursos</span>  
+        </a>
+      </li>
+      <li class="list" routerLinkActive="active">
+        <a routerLink="/inscripciones">
+          <span class="title">Inscripciones</span>  
+        </a>
+      </li>    
+    </ul>
+    <ng-template #falsedad>
+      <ul>
         <li class="list" routerLinkActive="active">
-          <a routerLink="/alumnos"  >
-            <span class="title">Alumnos</span>  
+          <a routerLink="/cursosXAlumno">
+            <span class="title">Mis Cursos</span>  
           </a>
-        </li>
-        <!-- <li class="list" routerLinkActive="active">
-          <a routerLink="/alumnos_aprobados"  >
-            <span class="title">Alumnos Aprobabos</span>  
-          </a>
-        </li> -->
-        <li class="list" routerLinkActive="active">
-          <a routerLink="/cursos">
-            <span class="title">Cursos</span>  
-          </a>
-        </li>
-        <li class="list" routerLinkActive="active">
-          <a routerLink="/inscripciones">
-            <span class="title">Inscripciones</span>  
-          </a>
-        </li>
-        <!-- <li class="list" routerLinkActive="active">
-          <a routerLink="/clases">
-            <span class="title">Clases</span>  
-          </a>
-        </li> -->
-      </ul> 
+        </li> 
+      </ul>
+    </ng-template>
+  </div>
 </div>

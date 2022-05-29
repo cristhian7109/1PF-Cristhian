@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
-import { Sesion } from '../interfaces/sesion';
 import { Usuario } from '../interfaces/usuario';
 
 @Injectable({
@@ -13,14 +12,13 @@ export class AuthService {
   private readonly ApiUrl='https://6271c5d2c455a64564b7a629.mockapi.io';
   sesion: any = {
     activa: false,
-    usuario: {
-    },
+    usuario: {},
   };
-  sesion2: any[] = [{
+  sesion2: any[]  = [{
     activa: false,
-    usuario: {
-    },
-  }]
+    usuario: {},
+  }];
+
   Usuario$!:Observable<any[]>;
   rol: any;
 
@@ -32,16 +30,28 @@ export class AuthService {
     return this.isAuthenticatedSrc.asObservable();
   }
 
- 
+ get isAdmin(): Observable<boolean> {
+    return this.rol;
+  }
 
   constructor(private http: HttpClient, private ruta: Router) {
     this.Usuario$ = new Observable((suscripcion)=>{
-        suscripcion.next(this.sesion2)
-        suscripcion.complete()
+      suscripcion.next(this.sesion2)
+      suscripcion.complete()
     })
+    var values = JSON.parse(localStorage.getItem('session') || 'false');
+    if (values.usuario !== undefined) {
+      if (values.usuario.rol === 1) {
+        this.rol = true;
+      } else {
+        this.rol = false;
+      }
+    } else {
+      this.rol = false;
+    }
+    
   }
   getSesion(): Observable<any[]>{
-    console.log(this.Usuario$);
     return this.Usuario$
   }
   //Inicio de sesión del usuario.
@@ -51,7 +61,6 @@ export class AuthService {
       .pipe(
         map((usuarios: Usuario[]) => {
           console.log(usuarios,usuario,contrasena);
-          
           return usuarios.filter(
             (u) => u.usuario === usuario && u.contrasena === contrasena
           );
@@ -59,14 +68,13 @@ export class AuthService {
       )
       .pipe(
         tap((res: any) => {
-          console.log(res);
-          
+          console.log(res[0]);
           if (res.length === 1) {
             this.isAuthenticatedSrc.next(true);
             if (res[0].rol == 1) {
-              this.rol = true;
+              this.rol =  true;
             } else {
-              this.rol = false;
+              this.rol =  false;
             }
           }
         })

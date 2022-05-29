@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 export class NavbarComponent implements OnInit, OnDestroy{
   userLogged: boolean=false;
   usernombre: string='';
+  rol: string = "";
   user: any[]=[];
   user$!: Observable<any[]>
   userSuscripcion!: any;
@@ -18,6 +19,7 @@ export class NavbarComponent implements OnInit, OnDestroy{
     var dataSesion : any = JSON.parse(localStorage.getItem('session')!);
     this.userLogged = dataSesion?.activa;
     this.usernombre = dataSesion?.usuario.nombre + ' ' + dataSesion?.usuario.apellido;
+    this.rol = dataSesion?.usuario.rol == 2 ? 'Administrador:  ':'Alumno:  '
   }
 
   logedOff(){

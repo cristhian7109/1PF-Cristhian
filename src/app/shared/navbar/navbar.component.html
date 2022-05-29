@@ -3,12 +3,13 @@
     Proyecto Final 1
     <div class="user" *ngIf="_AuthService.isAuthenticatedSrc | async;" >
         <img src="http://cdn.onlinewebfonts.com/svg/img_184513.png" width="20" alt="">
-        <div *ngFor="let user of user$ | async">
-            <div *ngIf="user.activa else falsed">
-                {{user.usuario.nombre + ' ' + user.usuario.apellido }}
+        <div *ngFor="let u of user$ | async">
+            <div *ngIf="u.activa else falsed">
+                <span>{{u.usuario.rol === 2 ? 'Administrador: ' : 'Alumno: '}}</span>
+                <span>{{u.usuario.nombre + ' ' + u.usuario.apellido}}</span>
             </div>
             <ng-template #falsed>
-                {{usernombre}}
+                {{rol + usernombre}}
             </ng-template>
         </div>
         <button (click)="logedOff()" >Cerrar Sesión</button>

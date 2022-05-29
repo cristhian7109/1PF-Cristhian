@@ -21,7 +21,12 @@ export class InscripcionService {
   }
   getInscripcionXcurso(inscripcion: any): Observable<any> {
     return this.http.get<any>(
-      `${this.ApiUrl}/Inscripciones?idCurso=${inscripcion.idCurso}`
+      `${this.ApiUrl}/suscripcion?idCurso=${inscripcion.idCurso}`
+    );
+  }
+  getInscripcionXAlumno(idAlumno: number): Observable<Inscripcion[]> {
+    return this.http.get<Inscripcion[]>(
+      `${this.ApiUrl}/suscripcion/${idAlumno}`
     );
   }
   eliminarInscripcion(suscripcion: any){
