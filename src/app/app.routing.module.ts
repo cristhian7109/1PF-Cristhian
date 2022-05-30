@@ -6,10 +6,7 @@ import { LoginComponent } from './shared/login/login.component';
 import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component';
 
 const routes: Routes = [
-    {
-        path: '',
-        loadChildren: () => import('./core/core.module').then((m) => m.CoreModule)
-    },
+    
     { 
         path: 'login', 
         component: LoginComponent, 
@@ -19,6 +16,10 @@ const routes: Routes = [
         path: '' ,
         component: IndexComponent,
         canActivate: [LoginGuard]
+    },
+    {
+        path: '',
+        loadChildren: () => import('./core/core.module').then((m) => m.CoreModule)
     },
     { 
         path: '**', 
