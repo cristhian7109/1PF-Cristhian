@@ -3,9 +3,9 @@ import { InscripcionService } from 'src/app/core/services/inscripcion.service';
 import { InscripcionComponent } from '../inscripciones.component';
 
 @Component({
-  selector: 'app-eliminar-Inscripcion',
-  templateUrl: './eliminar-Inscripcion.component.html',
-  styleUrls: ['./eliminar-Inscripcion.component.css']
+  selector: 'app-eliminar-inscripcion',
+  templateUrl: './eliminar-inscripcion.component.html',
+  styleUrls: ['./eliminar-inscripcion.component.css']
 })
 export class EliminarInscripcionComponent implements OnInit {
 

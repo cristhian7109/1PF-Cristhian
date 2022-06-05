@@ -17,7 +17,7 @@ export const initialState: CursoState = {
 export const cursoReducer = createReducer(
   initialState,
   on(CursoActions.cargarCursos, (state) => {
-    return { ...state, cargando: true };
+    return { ...state, cargando: true , cursos: initialState.cursos };
   }),
   on(CursoActions.cursosCargados, (state, { cursos }) => {
     return { ...state, cargando: false, cursos };

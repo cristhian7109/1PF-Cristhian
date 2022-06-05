@@ -4,6 +4,11 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Curso } from 'src/app/core/interfaces/cursos';
 import { CursoService } from 'src/app/core/services/cursos.service';
 import { Subscription, Observable } from 'rxjs';
+import { cargarCursos,cursosCargados } from './../../core/state/actions/curso.actions';
+import { Store } from '@ngrx/store';
+import { selectorListaCursos } from './../../core/state/selectors/curso.selector';
+import { AppState } from './../../core/state/app.state';
+
 @Component({
   selector: 'app-cursos',
   templateUrl: './cursos.component.html',
@@ -21,10 +26,13 @@ export class CursosComponent implements OnInit {
     id:0, nombre: "", descripcion: "", duracion:0
   }
 
-  constructor(private _cursoService: CursoService) { }
+  constructor(
+    private _cursoService: CursoService,
+    private store: Store<AppState>
+    ) { }
 
   ngOnInit(): void {
-    this.cargarCursos()
+    this.cargarCursosfn()
   }
 
   openModal(tipo:string,data:any) {
@@ -38,7 +46,7 @@ export class CursosComponent implements OnInit {
   } 
   closeModal() {
     this.modalAddEdit= 'closed'
-    this.cargarCursos()
+    this.cargarCursosfn()
   } 
   openModalEliminar(id:number) {
     this.seleccionado = {...this.seleccionado,id:id}
@@ -46,15 +54,22 @@ export class CursosComponent implements OnInit {
   } 
   closeModalEliminar() {
     this.modalEliminar= 'closed'
-    this.cargarCursos()
+    this.cargarCursosfn()
   } 
-  cargarCursos(){
-    this.listCurso = this._cursoService.getCurso();
+  cargarCursosfn(){
+    this.store.dispatch(cargarCursos());
+    this.listCurso = this.store.select(selectorListaCursos);
     this.cursoSubscription = this._cursoService.cursoSubject.subscribe(
-      () => {
-        this.listCurso = this._cursoService.getCurso();
+      (data) => {
+        this.store.dispatch(cursosCargados({ cursos: data }));
       }
     );
+    // this.listCurso = this._cursoService.getCurso();
+    // this.cursoSubscription = this._cursoService.cursoSubject.subscribe(
+    //   () => {
+    //     this.listCurso = this._cursoService.getCurso();
+    //   }
+    // );
     
   }
   ngOnDestroy(): void {

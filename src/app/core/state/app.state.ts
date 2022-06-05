@@ -6,10 +6,10 @@ import { InscripcionState } from './../interfaces/inscripcion.state';
 
 export interface AppState {
   cursos: CursoState,
-  inscripciones: InscripcionState,
+  inscripciones: InscripcionState
 };
 
 export const ROOT_REDUCERS: ActionReducerMap<AppState> = {
   cursos: cursoReducer,
-  inscripciones: inscripcionesReducer,
+  inscripciones: inscripcionesReducer
 }

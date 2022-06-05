@@ -51,5 +51,5 @@
       </div>
     </div>
     <app-crear-editar-inscripcion  *ngIf="modalAddEdit==='open'" (closeModalevent)="closeModal()" [modal]="modalAddEdit" [seleccionado]="seleccionado" [typemodal]="typemodal" ></app-crear-editar-inscripcion>
-    <app-eliminar-Inscripcion *ngIf="modalEliminar==='open'" (closeModalevent)="closeModalEliminar()" [modal]="modalEliminar" [seleccionado]="seleccionado"></app-eliminar-Inscripcion>
+    <app-eliminar-inscripcion *ngIf="modalEliminar==='open'" (closeModalevent)="closeModalEliminar()" [modal]="modalEliminar" [seleccionado]="seleccionado"></app-eliminar-inscripcion>
 </div>
