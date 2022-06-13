@@ -20,7 +20,7 @@ export class LoginGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    let sesion = JSON.parse(localStorage.getItem('session') || '{}');
+    let sesion = JSON.parse(localStorage.getItem('sessionPFCristhian') || '{}');
 
     if (sesion.activa) {
       return true;

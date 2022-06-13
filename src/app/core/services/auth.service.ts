@@ -23,7 +23,8 @@ export class AuthService {
   rol: any;
 
   isAuthenticatedSrc: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    JSON.parse(localStorage.getItem('session') || 'false')
+    localStorage.getItem('sessionPFCristhian')?
+    JSON.parse(localStorage.getItem('sessionPFCristhian') || 'false'):false
   );
 
   get isAuthenticated(): Observable<boolean> {
@@ -39,7 +40,9 @@ export class AuthService {
       suscripcion.next(this.sesion2)
       suscripcion.complete()
     })
-    var values = JSON.parse(localStorage.getItem('session') || 'false');
+    var values = JSON.parse(localStorage.getItem('sessionPFCristhian') || 'false');
+    console.log('gaa',values);
+    
     if (values.usuario !== undefined) {
       if (values.usuario.rol === 1) {
         this.rol = true;
@@ -87,7 +90,7 @@ export class AuthService {
       activa: false,
       usuario: {},
     };
-    localStorage.removeItem('session');
+    localStorage.removeItem('sessionPFCristhian');
     this.ruta.navigate(['login']);
     this.isAuthenticatedSrc.next(false);
   }
@@ -101,7 +104,7 @@ export class AuthService {
       activa: sesionActiva,
       usuario: usuario,
     }]
-    localStorage.setItem('session', JSON.stringify(this.sesion));
+    localStorage.setItem('sessionPFCristhian', JSON.stringify(this.sesion));
     this.ruta.navigate(['']);
   }
 }

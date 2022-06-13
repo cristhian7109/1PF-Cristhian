@@ -14,7 +14,7 @@ export class ToolbarComponent implements OnInit {
   userSuscripcion!: any;
 
   constructor(public _AuthService: AuthService) {
-    var dataSesion : any = JSON.parse(localStorage.getItem('session')!)
+    var dataSesion : any = JSON.parse(localStorage.getItem('sessionPFCristhian')!)
     this.rol = dataSesion?.usuario.rol
     console.log(this.rol);
     

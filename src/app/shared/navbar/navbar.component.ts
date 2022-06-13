@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit, OnDestroy{
   userSuscripcion!: any;
 
   constructor(public _AuthService: AuthService) {
-    var dataSesion : any = JSON.parse(localStorage.getItem('session')!);
+    var dataSesion : any = JSON.parse(localStorage.getItem('sessionPFCristhian')!);
     this.userLogged = dataSesion?.activa;
     this.usernombre = dataSesion?.usuario.nombre + ' ' + dataSesion?.usuario.apellido;
     this.rol = dataSesion?.usuario.rol == 2 ? 'Administrador:  ':'Alumno:  '

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class NopagefoundComponent {
   sesionActiva: boolean;
   constructor(private ruta: Router) {
-    this.sesionActiva = localStorage.getItem('session') ? true : false;
+    this.sesionActiva = localStorage.getItem('sessionPFCristhian') ? true : false;
   }
   goLogin() {
     this.ruta.navigate(['login']);
